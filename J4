@@ -1,0 +1,61 @@
+public class Number {
+
+    // Private instance variable to store the number
+    private double value;
+
+    // Constructor to initialize the value
+    public Number(double value) {
+        this.value = value;
+    }
+
+    // Method to check if the number is zero
+    public boolean isZero() {
+        return value == 0;
+    }
+
+    // Method to check if the number is positive
+    public boolean isPositive() {
+        return value > 0;
+    }
+
+    // Method to check if the number is negative
+    public boolean isNegative() {
+        return value < 0;
+    }
+
+    // Method to check if the number is odd
+    public boolean isOdd() {
+        // A double number can only be considered odd if it's an integer
+        return value % 2 != 0 && value == (int) value;
+    }
+
+    // Method to check if the number is even
+    public boolean isEven() {
+        // A double number can only be considered even if it's an integer
+        return value % 2 == 0 && value == (int) value;
+    }
+
+    // Method to get the factorial of the number
+    public double getFactorial() {
+        // Factorial is only defined for non-negative integers
+        if (value < 0 || value != (int) value) {
+            throw new IllegalArgumentException("Factorial is undefined for negative or non-integer values.");
+        }
+        int n = (int) value;
+        double factorial = 1;
+        for (int i = 1; i <= n; i++) {
+            factorial *= i;
+        }
+        return factorial;
+    }
+
+    // Get method for the value
+    public double getValue() {
+        return value;
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        Number number = new Number(5);
+        System.out.println("Is Zero: " + number.isZero());
+        System
