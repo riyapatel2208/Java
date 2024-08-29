@@ -1,0 +1,41 @@
+public class Utility {
+
+    // Method to calculate factorial
+    public static long factorial(long value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
+        }
+        long result = 1;
+        for (long i = 2; i <= value; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    // Method to check if a number is prime
+    public static boolean isPrime(int value) {
+        if (value <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(value); i++) {
+            if (value % i == 0) return false;
+        }
+        return true;
+    }
+
+    // Method to check if a number is even
+    public static boolean isEven(long value) {
+        return value % 2 == 0;
+    }
+
+    // Method to check if a number is odd
+    public static boolean isOdd(long value) {
+        return value % 2 != 0;
+    }
+    
+    // Main method for testing
+    public static void main(String[] args) {
+        System.out.println("Factorial of 5: " + factorial(5));
+        System.out.println("Is 7 prime? " + isPrime(7));
+        System.out.println("Is 10 even? " + isEven(10));
+        System.out.println("Is 3 odd? " + isOdd(3));
+    }
+}
