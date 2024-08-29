@@ -1,0 +1,20 @@
+import java.util.Arrays;
+
+public class SortStrings {
+    public static void main(String[] args) {
+        // Check if the user provided 5 strings as input
+        if (args.length != 5) {
+            System.out.println("Please provide exactly 5 strings.");
+            return;
+        }
+
+        // Sort the strings
+        Arrays.sort(args);
+
+        // Display the sorted strings
+        System.out.println("Sorted strings:");
+        for (String str : args) {
+            System.out.println(str);
+        }
+    }
+}
