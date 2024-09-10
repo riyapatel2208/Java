@@ -1,0 +1,165 @@
+import java.util.*;
+
+public class Matrix {
+
+    // Matrix Addition
+    public static void Addition(int[][] Matrix1, int[][] Matrix2, int size1, int size2) {
+        int[][] MatrixAddition = new int[size1][size2];
+        int i, j;
+        System.out.println("\n\t Addition of Both Matrices is:");
+        for (i = 0; i < size1; i++) {
+            System.out.println(" ");
+            for (j = 0; j < size2; j++) {
+                MatrixAddition[i][j] = Matrix1[i][j] + Matrix2[i][j];
+                System.out.print("\t" + MatrixAddition[i][j]);
+            }
+            System.out.println(" ");
+        }
+    }
+
+    // Matrix Subtraction
+    public static void Subtraction(int[][] Matrix1, int[][] Matrix2, int size1, int size2) {
+        int[][] MatrixSubtraction = new int[size1][size2];
+        int i, j;
+        System.out.println("\n\t Subtraction of Both Matrices is:");
+        for (i = 0; i < size1; i++) {
+            System.out.println(" ");
+            for (j = 0; j < size2; j++) {
+                MatrixSubtraction[i][j] = Matrix1[i][j] - Matrix2[i][j];
+                System.out.print("\t" + MatrixSubtraction[i][j]);
+            }
+            System.out.println(" ");
+        }
+    }
+
+    // Matrix Multiplication
+    public static void Multiplication(int[][] Matrix1, int[][] Matrix2, int row1, int col1, int col2) {
+        int[][] result = new int[row1][col2];
+        int i, j, k;
+        System.out.println("\nMultiplication of Both Matrices is:");
+
+        // Perform matrix multiplication
+        for (i = 0; i < row1; i++) {
+            for (j = 0; j < col2; j++) {
+                result[i][j] = 0;
+                for (k = 0; k < col1; k++) {
+                    result[i][j] += Matrix1[i][k] * Matrix2[k][j];
+                }
+                System.out.print("\t" + result[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String args[]) {
+        int Matrix1[][], Matrix2[][];
+        int row1, col1, row2, col2, i, j, option;
+        Scanner sc = new Scanner(System.in);
+
+        // Input for Matrix 1 dimensions
+        System.out.print("\t Enter Number of Rows for Matrix 1: ");
+        row1 = sc.nextInt();
+        System.out.print("\t Enter Number of Columns for Matrix 1: ");
+        col1 = sc.nextInt();
+
+        // Input for Matrix 2 dimensions
+        System.out.print("\t Enter Number of Rows for Matrix 2: ");
+        row2 = sc.nextInt();
+        System.out.print("\t Enter Number of Columns for Matrix 2: ");
+        col2 = sc.nextInt();
+
+        // Check if the matrices can be multiplied
+        if (col1 != row2) {
+            System.out.println("Matrix multiplication is not possible. Columns of Matrix 1 must equal rows of Matrix 2.");
+            return;
+        }
+
+        System.out.println("\nMatrix 1 size is " + row1 + " x " + col1);
+        System.out.println("Matrix 2 size is " + row2 + " x " + col2);
+
+        // Initialize the matrices
+        Matrix1 = new int[row1][col1];
+        Matrix2 = new int[row2][col2];
+
+        // Input values for Matrix 1
+        System.out.println("\n\t Enter Your First Matrix Values:");
+        for (i = 0; i < row1; i++) {
+            System.out.println("Row " + (i + 1));
+            for (j = 0; j < col1; j++) {
+                System.out.print("Enter element [" + (i + 1) + "][" + (j + 1) + "]: ");
+                Matrix1[i][j] = sc.nextInt();
+            }
+            System.out.println();
+        }
+
+        // Input values for Matrix 2
+        System.out.println("\n\t Enter Your Second Matrix Values:");
+        for (i = 0; i < row2; i++) {
+            System.out.println("Row " + (i + 1));
+            for (j = 0; j < col2; j++) {
+                System.out.print("Enter element [" + (i + 1) + "][" + (j + 1) + "]: ");
+                Matrix2[i][j] = sc.nextInt();
+            }
+            System.out.println();
+        }
+
+        // Display matrices
+        System.out.println("\n\t This is Your First Matrix:");
+        for (i = 0; i < row1; i++) {
+            for (j = 0; j < col1; j++) {
+                System.out.print("\t" + Matrix1[i][j]);
+            }
+            System.out.println();
+        }
+
+        System.out.println("\n\t This is Your Second Matrix:");
+        for (i = 0; i < row2; i++) {
+            for (j = 0; j < col2; j++) {
+                System.out.print("\t" + Matrix2[i][j]);
+            }
+            System.out.println();
+        }
+
+        // Menu for operations using while loop
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("1. Matrix Addition");
+            System.out.println("2. Matrix Subtraction");
+            System.out.println("3. Matrix Multiplication");
+            System.out.println("4. Exit");
+            System.out.print("Please Select One Option: ");
+            option = sc.nextInt();
+
+            switch (option) {
+                case 1:
+                    if (row1 == row2 && col1 == col2) {
+                        Addition(Matrix1, Matrix2, row1, col1);
+                    } else {
+                        System.out.println("Matrix Addition not possible. Matrices must be of the same size.");
+                    }
+                    break;
+
+                case 2:
+                    if (row1 == row2 && col1 == col2) {
+                        Subtraction(Matrix1, Matrix2, row1, col1);
+                    } else {
+                        System.out.println("Matrix Subtraction not possible. Matrices must be of the same size.");
+                    }
+                    break;
+
+                case 3:
+                    Multiplication(Matrix1, Matrix2, row1, col1, col2);
+                    break;
+
+                case 4:
+                    System.out.println("\n\t Program is Exit \n\n");
+                    exit = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please select a valid option.");
+                    break;
+            }
+        }
+    }
+}
