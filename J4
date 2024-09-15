@@ -58,4 +58,15 @@ public class Number {
     public static void main(String[] args) {
         Number number = new Number(5);
         System.out.println("Is Zero: " + number.isZero());
-        System
+        System.out.println("Is Positive: " + number.isPositive());
+        System.out.println("Is Negative: " + number.isNegative());
+        System.out.println("Is Odd: " + number.isOdd());
+        System.out.println("Is Even: " + number.isEven());
+        
+        try {
+            System.out.println("Factorial: " + number.getFactorial());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
