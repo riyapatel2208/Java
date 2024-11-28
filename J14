@@ -1,0 +1,54 @@
+import java.io.*;
+
+class FileCopy {
+    public static void main(String[] args) {
+        if (args.length != 3) {
+            System.out.println("Usage: java FileCopy <source_file> <destination_file> <mode (binary/text)>");
+            return;
+        }
+
+        String sourceFile = args[0];
+        String destinationFile = args[1];
+        String mode = args[2];
+
+        try {
+            FileInputStream file = new FileInputStream(sourceFile);
+            FileOutputStream newFile = new FileOutputStream(destinationFile);
+
+            if (mode.equals("binary")) {
+                copyBinary(file, newFile);
+                System.out.println("Binary file copied successfully.");
+            } else if (mode.equals("text")) {
+                copyText(file, newFile);
+                System.out.println("Text file copied successfully.");
+            } else {
+                System.out.println("Invalid mode! Use 'binary' or 'text'.");
+            }
+
+            file.close();
+            newFile.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void copyBinary(FileInputStream file, FileOutputStream newFile) throws IOException {
+        int data;
+        while ((data = file.read()) != -1) {
+            newFile.write(data);
+        }
+    }
+
+    public static void copyText(FileInputStream file, FileOutputStream newFile) throws IOException {
+        InputStreamReader reader = new InputStreamReader(file);
+        OutputStreamWriter writer = new OutputStreamWriter(newFile);
+
+        int data;
+        while ((data = reader.read()) != -1) {
+            writer.write(data);
+        }
+
+        reader.close();
+        writer.close();
+    }
+}
