@@ -1,0 +1,59 @@
+class OddThread extends Thread {
+    @Override
+    public void run() {
+        for (int num = 1; num <= 100; num += 2) {
+            System.out.println("Odd number: " + num);
+            try {
+                Thread.sleep(500); // Sleep for 0.5 seconds
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+class PrimeThread implements Runnable {
+    // Method to check if a number is prime
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void run() {
+        for (int num = 1; num <= 100; num++) {
+            if (isPrime(num)) {
+                System.out.println("Prime number: " + num);
+            }
+            try {
+                Thread.sleep(1000); // Sleep for 1 second
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create thread objects for OddThread and PrimeThread
+        OddThread oddThread = new OddThread();
+        PrimeThread primeThread = new PrimeThread();
+        Thread primeThreadObject = new Thread(primeThread); // PrimeThread needs to be wrapped into a Thread object
+        
+        // Start both threads
+        oddThread.start();
+        primeThreadObject.start();
+        
+        try {
+            // Wait for both threads to finish
+            oddThread.join();
+            primeThreadObject.join();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
